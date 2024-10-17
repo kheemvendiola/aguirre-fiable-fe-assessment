@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Direction } from '../../enums/directions';
-import Marker from './Marker';
+import type { Meta, StoryObj } from "@storybook/react";
+import { Direction } from "../../enums/directions";
+import Marker from "./Marker";
 
 const meta = {
   component: Marker,

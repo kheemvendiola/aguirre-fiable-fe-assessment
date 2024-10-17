@@ -1,7 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { expect, userEvent, within } from '@storybook/test';
-import { INVALID_COORDINATES_ERROR, INVALID_DIRECTION_ERROR, INVALID_FORMAT } from '../../helpers/error-messages';
-import GridVisualizer from './GridVisualizer';
+import type { Meta, StoryObj } from "@storybook/react";
+import { expect, userEvent, within } from "@storybook/test";
+import {
+  INVALID_COORDINATES_ERROR,
+  INVALID_DIRECTION_ERROR,
+  INVALID_FORMAT,
+} from "../../helpers/error-messages";
+import GridVisualizer from "./GridVisualizer";
 
 const meta = {
   component: GridVisualizer,
@@ -12,10 +16,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const testInputValue = async (canvas: any, testValue: string) => {
-  await userEvent.type(canvas.getByRole('textbox'), testValue);
+  await userEvent.type(canvas.getByRole("textbox"), testValue);
   await userEvent.click(canvas.getByTestId("gridVisualizer"));
-  await expect(canvas.getByRole('textbox')).toHaveValue(testValue)
-}
+  await expect(canvas.getByRole("textbox")).toHaveValue(testValue);
+};
 
 export const Default: Story = {
   play: async ({ canvasElement }) => {
@@ -23,39 +27,27 @@ export const Default: Story = {
     const testValue = "0,0 NORTH";
 
     await testInputValue(canvas, testValue);
-    expect(
-      canvas.getByTestId(
-        "marker"
-      )
-    ).toBeInTheDocument();
-  },
-};
-
-export const MoveRight: Story = {
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const testValue = "0,1 NORTH";
-
-    await testInputValue(canvas, testValue);
-    expect(
-      canvas.getByTestId(
-        "marker"
-      )
-    ).toBeInTheDocument();
+    expect(canvas.getByTestId("marker")).toBeInTheDocument();
   },
 };
 
 export const MoveUp: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
+    const testValue = "0,1 NORTH";
+
+    await testInputValue(canvas, testValue);
+    expect(canvas.getByTestId("marker")).toBeInTheDocument();
+  },
+};
+
+export const MoveRight: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
     const testValue = "1,1 NORTH";
 
     await testInputValue(canvas, testValue);
-    expect(
-      canvas.getByTestId(
-        "marker"
-      )
-    ).toBeInTheDocument();
+    expect(canvas.getByTestId("marker")).toBeInTheDocument();
   },
 };
 
@@ -65,11 +57,7 @@ export const RotateMarkerToEast: Story = {
     const testValue = "1,1 EAST";
 
     await testInputValue(canvas, testValue);
-    expect(
-      canvas.getByTestId(
-        "marker"
-      )
-    ).toBeInTheDocument();
+    expect(canvas.getByTestId("marker")).toBeInTheDocument();
   },
 };
 
@@ -79,11 +67,7 @@ export const RotateMarkerToWest: Story = {
     const testValue = "1,1 WEST";
 
     await testInputValue(canvas, testValue);
-    expect(
-      canvas.getByTestId(
-        "marker"
-      )
-    ).toBeInTheDocument();
+    expect(canvas.getByTestId("marker")).toBeInTheDocument();
   },
 };
 
@@ -94,9 +78,7 @@ export const InvalidCoordinates: Story = {
 
     await testInputValue(canvas, testValue);
     await expect(
-      canvas.getByText(
-        INVALID_COORDINATES_ERROR,
-      ),
+      canvas.getByText(INVALID_COORDINATES_ERROR)
     ).toBeInTheDocument();
   },
 };
@@ -107,13 +89,8 @@ export const InvalidDirection: Story = {
     const testValue = "1,1 W";
 
     await testInputValue(canvas, testValue);
-    await expect(
-      canvas.getByText(
-        INVALID_DIRECTION_ERROR,
-      ),
-    ).toBeInTheDocument();
+    await expect(canvas.getByText(INVALID_DIRECTION_ERROR)).toBeInTheDocument();
   },
-
 };
 
 export const InvalidFormat: Story = {
@@ -122,10 +99,6 @@ export const InvalidFormat: Story = {
     const testValue = "randomText";
 
     await testInputValue(canvas, testValue);
-    await expect(
-      canvas.getByText(
-        INVALID_FORMAT,
-      ),
-    ).toBeInTheDocument();
+    await expect(canvas.getByText(INVALID_FORMAT)).toBeInTheDocument();
   },
 };

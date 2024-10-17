@@ -1,7 +1,7 @@
-import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
-import { blueGrey } from '@mui/material/colors';
-import { Direction } from '../../enums/directions';
-import { convertDirectionToDegrees } from '../../helpers/helpers';
+import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
+import { blueGrey } from "@mui/material/colors";
+import { Direction } from "../../enums/directions";
+import { convertDirectionToDegrees } from "../../helpers/helpers";
 
 interface MarkerProps {
   direction: Direction;
@@ -10,6 +10,9 @@ interface MarkerProps {
 export default function Marker({ direction }: MarkerProps) {
   const deg = convertDirectionToDegrees(direction);
   return (
-    <AccessibilityNewIcon data-testid="marker" sx={{ transform: `rotate(${deg})`, color: blueGrey[900] }} />
-  )
+    <AccessibilityNewIcon
+      data-testid="marker"
+      sx={{ transform: `rotate(${deg})`, color: blueGrey[900] }}
+    />
+  );
 }
